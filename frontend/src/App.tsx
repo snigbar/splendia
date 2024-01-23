@@ -5,6 +5,8 @@ import {
   Routes,
 } from "react-router-dom";
 import Layout from "./layout/Layout";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -14,7 +16,23 @@ function App() {
           path="/"
           element={
             <Layout>
-              <div>hi</div>
+              <Home></Home>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <div>search</div>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <Layout>
+              <Register></Register>
             </Layout>
           }
         ></Route>

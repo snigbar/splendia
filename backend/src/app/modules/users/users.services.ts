@@ -12,7 +12,7 @@ const createUserInDB = async (payload: UserType) => {
     const user = new UserModel(payload)
     await user.save()
 
-    const token = jwt.sign({ email: user.email }, config.jwtSecret as string, {
+    const token = jwt.sign({ userId: user._id }, config.jwtSecret as string, {
       expiresIn: '1d',
     })
 

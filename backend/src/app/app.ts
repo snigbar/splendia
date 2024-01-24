@@ -3,9 +3,12 @@ import cors from 'cors'
 import notFoundApi from './middlewares/notFoundApi'
 import router from './router/router'
 import globalErrorHandler from './middlewares/globarErrorHandler'
+import config from './config/config'
+import cookieParser from 'cookie-parser'
 
 const app: Application = express()
-app.use(cors())
+app.use(cookieParser())
+app.use(cors({ origin: config.frontEndURL, credentials: true }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

@@ -9,4 +9,5 @@ export default {
   enviroment: process.env.ENVIROMENT,
   salt: process.env.SALT,
   jwtSecret: process.env.JWT_SECRET,
+  frontEndURL: process.env.FRONT_END_URL,
 }

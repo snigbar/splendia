@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import { authValidationSchema } from './auth.validations'
-import { loginUser } from './auth.controller'
+import { getToken, loginUser } from './auth.controller'
+import verifyToken from '../../middlewares/auth'
 
 const router = Router()
 
@@ -16,5 +17,7 @@ router.post(
   },
   loginUser,
 )
+
+router.get('/validate-token', verifyToken, getToken)
 
 export const authRoute = router

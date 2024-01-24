@@ -7,6 +7,7 @@ export type TToast = {
 
 export type TAppContext = {
   showToast: (toast: TToast) => void;
+  isLoggedIn: boolean;
 };
 
 export interface TChildren {

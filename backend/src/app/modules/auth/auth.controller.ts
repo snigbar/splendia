@@ -5,7 +5,7 @@ import { Request, Response } from 'express'
 
 export const loginUser = handleAsyncRequest(
   async (req: Request, res: Response) => {
-    const { token, _id } = await login(req.body)
+    const { token, userId } = await login(req.body)
 
     res.cookie('auth_token', token, {
       httpOnly: true,
@@ -16,7 +16,13 @@ export const loginUser = handleAsyncRequest(
     res.status(200).json({
       success: true,
       message: 'user logged in successfully',
-      data: { _id },
+      data: { userId },
     })
+  },
+)
+
+export const getToken = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    res.status(200).send({ userId: req.userId })
   },
 )

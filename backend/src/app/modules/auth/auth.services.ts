@@ -12,12 +12,12 @@ export const login = async (payload: loginType) => {
   const isMatch = await bcrypt.compare(password, user.password)
   if (!isMatch) throw new Error('invalid credentials')
 
-  const token = jwt.sign({ email: user.email }, config.jwtSecret as string, {
+  const token = jwt.sign({ userId: user._id }, config.jwtSecret as string, {
     expiresIn: '1d',
   })
 
   return {
     token,
-    _id: user._id,
+    userId: user._id,
   }
 }

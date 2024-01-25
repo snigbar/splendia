@@ -26,3 +26,9 @@ export const getToken = handleAsyncRequest(
     res.status(200).send({ userId: req.userId })
   },
 )
+export const logout = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    res.cookie('auth_token', '', { expires: new Date(0) })
+    res.send()
+  },
+)

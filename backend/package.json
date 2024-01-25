@@ -11,7 +11,8 @@
     "lint": "eslint source --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "prettier:fix": "npx prettier --write src"
+    "prettier:fix": "npx prettier --write src",
+    "e2e": "env-cmd -f .env.e2e ts-node-dev --respawn --transpile-only ./src/app/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.2",

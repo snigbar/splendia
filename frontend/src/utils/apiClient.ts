@@ -1,8 +1,7 @@
-import { RegisterFormData } from "../interfaces/interfaces";
-
+import { TRegisterFormData } from "../interfaces/interfaces";
 const API_BASE_URL = import.meta.env.VITE_DEV_URL;
 
-export const register = async (formData: RegisterFormData) => {
+export const register = async (formData: TRegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: "POST",
     credentials: "include",
@@ -27,4 +26,35 @@ export const validateToken = async () => {
   }
   const result = await response.json();
   return result;
+};
+
+export const signIn = async (data: Partial<TRegisterFormData>) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+
+  if (!result.success) {
+    throw new Error(result.message || "failed to sign in");
+  }
+
+  if (!response.ok) throw new Error("invalid credentials");
+
+  return result;
+};
+
+export const logOut = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+    credentials: "include",
+    method: "POST",
+  });
+  if (!response.ok) {
+    throw new Error("something went wrong");
+  }
 };

@@ -14,7 +14,7 @@ export interface TChildren {
   children: ReactNode;
 }
 
-export type RegisterFormData = {
+export type TRegisterFormData = {
   firstName: string;
   lastName: string;
   email: string;

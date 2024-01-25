@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterFormData } from "../interfaces/interfaces";
+import { TRegisterFormData } from "../interfaces/interfaces";
 import * as apiClient from "../utils/apiClient";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useAppContext } from "../context/AppContext";
 import cn from "../lib/cn";
 
@@ -13,8 +13,8 @@ export default function Register() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegisterFormData>();
-  //  const queryClient = useQueryClient()
+  } = useForm<TRegisterFormData>();
+  const queryClient = useQueryClient();
 
   const { showToast } = useAppContext();
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ export default function Register() {
   const mutation = useMutation(apiClient.register, {
     onSuccess: () => {
       showToast({ message: "Registration Successful", type: "success" });
+      queryClient.invalidateQueries("validateToken");
       reset();
       navigate("/");
     },
@@ -47,7 +48,7 @@ export default function Register() {
           <div>
             <input
               type="text"
-              className="block border border-gray-200 w-full p-3 rounded"
+              className="block border border-gray-400 w-full p-3 rounded"
               placeholder="First Name"
               {...register("firstName", { required: "First Name is required" })}
               autoComplete="true"
@@ -61,7 +62,7 @@ export default function Register() {
           <div>
             <input
               type="text"
-              className="block border border-gray-200 w-full p-3 rounded"
+              className="block border border-gray-400 w-full p-3 rounded"
               placeholder="Last Name"
               {...register("lastName", { required: "Last Name is required" })}
               autoComplete="true"
@@ -78,7 +79,7 @@ export default function Register() {
         <div className="mb-4">
           <input
             type="email"
-            className="block border border-gray-200 w-full p-3 rounded"
+            className="block border border-gray-400 w-full p-3 rounded"
             placeholder="Email"
             {...register("email", {
               required: "email is required",
@@ -97,13 +98,17 @@ export default function Register() {
         <div className="mb-4">
           <input
             type="password"
-            className="block border border-gray-200 w-full p-3 rounded"
+            className="block border border-gray-400 w-full p-3 rounded"
             placeholder="Password"
             {...register("password", {
               required: "This field is required",
               minLength: {
                 value: 8,
                 message: "Password must be at least 8 characters",
+              },
+              maxLength: {
+                value: 20,
+                message: "Password should not exceed 20 characters",
               },
             })}
             autoComplete="true"
@@ -117,7 +122,7 @@ export default function Register() {
         <div className="mb-4">
           <input
             type="password"
-            className="block border border-gray-200 w-full p-3 rounded"
+            className="block border border-gray-400 w-full p-3 rounded"
             placeholder="Confirm Password"
             {...register("confirmPassword", {
               validate: (val) => {
@@ -152,7 +157,7 @@ export default function Register() {
         </div>
         <div className="text-center text-grey-dark mt-2">
           Already have an account?{" "}
-          <Link to="/login" className="text-cyan-500 font-semibold underline">
+          <Link to="/signin" className="text-cyan-500 font-semibold underline">
             Log in.
           </Link>
         </div>

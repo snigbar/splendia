@@ -10,4 +10,7 @@ export default {
   salt: process.env.SALT,
   jwtSecret: process.env.JWT_SECRET,
   frontEndURL: process.env.FRONT_END_URL,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRETS,
 }

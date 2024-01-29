@@ -23,7 +23,7 @@ export const loginUser = handleAsyncRequest(
 
 export const getToken = handleAsyncRequest(
   async (req: Request, res: Response) => {
-    res.status(200).send({ userId: req.userId })
+    res.status(200).json({ userId: req.userId })
   },
 )
 export const logout = handleAsyncRequest(

@@ -8,6 +8,7 @@ import Layout from "./layout/Layout";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
+import AddHotel from "./pages/AddHotel";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
           element={
             <Layout>
               <SignIn></SignIn>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/add-hotel"
+          element={
+            <Layout>
+              <AddHotel></AddHotel>
             </Layout>
           }
         ></Route>

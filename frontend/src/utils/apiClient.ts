@@ -1,5 +1,5 @@
 import { TRegisterFormData } from "../interfaces/interfaces";
-const API_BASE_URL = import.meta.env.VITE_DEV_URL;
+const API_BASE_URL = import.meta.env.VITE_DEV_URL || "";
 
 export const register = async (formData: TRegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -57,4 +57,17 @@ export const logOut = async () => {
   if (!response.ok) {
     throw new Error("something went wrong");
   }
+};
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels`, {
+    method: "POST",
+    credentials: "include",
+    body: hotelFormData,
+  });
+  if (!response.ok) {
+    throw new Error("Failed to add hotel");
+  }
+
+  return await response.json();
 };

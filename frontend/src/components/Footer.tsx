@@ -14,7 +14,7 @@ export default function Footer() {
         <p className=" text-gray-600">©copyright - Splendia-2009</p>
       </div>
 
-      <ul className="text-gray-900 text-sm space-y-1 px-4">
+      <ul className="text-gray-900 text-sm space-y-1 px-4 py-2">
         <li className="hover:font-medium">Help</li>
         <li className="hover:font-medium">FAQ</li>
         <li className="hover:font-medium">Customer Services</li>

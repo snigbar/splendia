@@ -93,4 +93,5 @@ export type HotelsResponseType = {
   imageUrls: string[];
   lastUpdated: Date;
   bookings: BookingType[];
+  createdAt?: string;
 };

@@ -5,6 +5,7 @@ import HotelModel from './hotels.model'
 import { findMyhotelsFromDB, findSingleHotel } from './hotels.services'
 import uploadImages, { deleteImgsFromCloudinary } from '../../utils/uploadImges'
 
+// create hotel
 export const createHotel = handleAsyncRequest(
   async (req: Request, res: Response) => {
     const imageFiles = req.files as Express.Multer.File[]
@@ -25,6 +26,8 @@ export const createHotel = handleAsyncRequest(
   },
 )
 
+// get hotels
+
 export const getHotels = handleAsyncRequest(
   async (req: Request, res: Response) => {
     const userId = req.userId
@@ -35,6 +38,7 @@ export const getHotels = handleAsyncRequest(
   },
 )
 
+// get singleHotel
 export const getSingleHotel = handleAsyncRequest(
   async (req: Request, res: Response) => {
     const userId = req.userId
@@ -47,6 +51,7 @@ export const getSingleHotel = handleAsyncRequest(
   },
 )
 
+// update hotel
 export const updateHotel = handleAsyncRequest(
   async (req: Request, res: Response) => {
     const userId = req.userId
@@ -90,5 +95,31 @@ export const updateHotel = handleAsyncRequest(
     await result.save()
 
     res.status(201).json({ message: 'hotel retrived successful', data: result })
+  },
+)
+
+// queries api
+export const getQueries = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    const pageSize = 5
+    const page = parseInt(req.query?.page ? req.query.page.toString() : '1')
+    const skip = (page - 1) * pageSize
+
+    const hotels = await HotelModel.find().skip(skip).limit(pageSize)
+
+    if (!hotels) {
+      throw new Error('no hotel found')
+    }
+    const documentCount = await HotelModel.countDocuments()
+
+    res.status(201).json({
+      message: 'hotel retrived successful',
+      data: hotels,
+      pagination: {
+        total: documentCount,
+        page,
+        pages: Math.ceil(documentCount / pageSize),
+      },
+    })
   },
 )

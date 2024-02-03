@@ -35,6 +35,7 @@ router.post(
 )
 
 router.get('/my-hotels', verifyToken, getHotels)
+router.get('/search')
 router.get('/my-hotels/:id', verifyToken, getSingleHotel)
 router.put(
   '/my-hotels/:id',

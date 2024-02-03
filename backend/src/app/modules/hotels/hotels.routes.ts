@@ -3,6 +3,7 @@ import multer from 'multer'
 import {
   createHotel,
   getHotels,
+  getQueries,
   getSingleHotel,
   updateHotel,
 } from './hotels.controllers'
@@ -35,7 +36,7 @@ router.post(
 )
 
 router.get('/my-hotels', verifyToken, getHotels)
-router.get('/search')
+router.get('/search', getQueries)
 router.get('/my-hotels/:id', verifyToken, getSingleHotel)
 router.put(
   '/my-hotels/:id',

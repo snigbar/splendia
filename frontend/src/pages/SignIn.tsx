@@ -13,7 +13,6 @@ export default function SignIn() {
     reset,
     formState: { errors },
   } = useForm<Partial<TRegisterFormData>>();
-  //  const queryClient = useQueryClient()
 
   const { showToast } = useAppContext();
   const navigate = useNavigate();

@@ -106,8 +106,12 @@ function DetailsSection() {
             <option value="" selected>
               Select Star Rating
             </option>
-            {[1, 2, 3, 4, 5].map((val) => {
-              return <option value={val}>{val}</option>;
+            {[1, 2, 3, 4, 5].map((val, idx) => {
+              return (
+                <option value={val} key={val + idx}>
+                  {val}
+                </option>
+              );
             })}
           </select>
           {errors.starRating && (

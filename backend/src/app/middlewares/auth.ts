@@ -19,7 +19,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const decoded = jwt.verify(token, config.jwtSecret as string)
-
     req.userId = (decoded as JwtPayload).userId
     next()
 

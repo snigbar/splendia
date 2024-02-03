@@ -1,6 +1,11 @@
 import express, { NextFunction, Request, Response } from 'express'
 import multer from 'multer'
-import { createHotel } from './hotels.controllers'
+import {
+  createHotel,
+  getHotels,
+  getSingleHotel,
+  updateHotel,
+} from './hotels.controllers'
 import verifyToken from '../../middlewares/auth'
 import hotelValidationSchema from './hotels.validations'
 
@@ -15,7 +20,7 @@ const upload = multer({
 })
 
 router.post(
-  '/',
+  '/my-hotels',
   verifyToken,
   upload.array('imageFiles', 6),
   async (req: Request, res: Response, next: NextFunction) => {
@@ -29,5 +34,13 @@ router.post(
   createHotel,
 )
 
+router.get('/my-hotels', verifyToken, getHotels)
+router.get('/my-hotels/:id', verifyToken, getSingleHotel)
+router.put(
+  '/my-hotels/:id',
+  verifyToken,
+  upload.array('imageFiles'),
+  updateHotel,
+)
 const hotelRoutes = router
 export default hotelRoutes

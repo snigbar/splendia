@@ -2,21 +2,33 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import DetailsSection from "./DetailsSection";
 import TypeSection from "./TypeSection";
-import { HotelFormData } from "../../interfaces/interfaces";
+import { HotelFormData, HotelsResponseType } from "../../interfaces/interfaces";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImageSection from "./ImageSection";
+import { useEffect } from "react";
 
-interface Props {
+interface TProps {
+  hotel?: HotelsResponseType;
   isLoading: boolean;
   onSave: (data: FormData) => void;
 }
 
-function ManageHotelsForms({ isLoading, onSave }: Props) {
+function ManageHotelsForms({ isLoading, onSave, hotel }: TProps) {
   const formMethods = useForm<HotelFormData>();
+
+  const { reset } = formMethods;
+
+  useEffect(() => {
+    reset(hotel);
+  }, [hotel, reset]);
 
   const onSubmit = formMethods.handleSubmit((data: HotelFormData) => {
     const formData = new FormData();
+    if (hotel) {
+      formData.append("hotelId", hotel?._id);
+    }
+
     formData.append("name", data.name);
     formData.append("city", data.city);
     formData.append("country", data.country);
@@ -30,6 +42,12 @@ function ManageHotelsForms({ isLoading, onSave }: Props) {
     data.facilities.forEach((val, idx) =>
       formData.append(`facilities[${idx}]`, val)
     );
+
+    if (data.imageUrls) {
+      data.imageUrls.forEach((val, idx) => {
+        formData.append(`imageUrls[${idx}]`, val);
+      });
+    }
     Array.from(data.imageFiles).forEach((img) =>
       formData.append("imageFiles", img)
     );

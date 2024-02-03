@@ -9,6 +9,8 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
+import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
 
 function App() {
   return (
@@ -51,6 +53,22 @@ function App() {
           element={
             <Layout>
               <AddHotel></AddHotel>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/my-hotels"
+          element={
+            <Layout>
+              <MyHotels></MyHotels>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/my-hotels/edit-hotel/:hotelId"
+          element={
+            <Layout>
+              <EditHotel></EditHotel>
             </Layout>
           }
         ></Route>

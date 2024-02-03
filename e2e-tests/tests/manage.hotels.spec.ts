@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import path from "path";
 
-const ui_url = "  http://localhost:5173/";
+const ui_url = "http://localhost:5173/";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(ui_url);
@@ -38,4 +38,39 @@ test("should allow users to add hotel", async ({ page }) => {
 
   await page.getByRole("button", { name: "Save" }).click();
   await expect(page.getByText("Hotel saved successfully")).toBeVisible();
+});
+
+test("should display hotels", async ({ page }) => {
+  await page.goto(ui_url + "my-hotels");
+  await expect(page.getByText("Test Hotel")).toBeVisible();
+  await expect(page.getByText("Test City")).toBeVisible();
+  await expect(page.getByText("Test Country")).toBeVisible();
+  await expect(page.getByText("This is test description")).toBeVisible();
+  await expect(page.getByText("£5 per night")).toBeVisible();
+  await expect(page.getByText("4 stars")).toBeVisible();
+  await expect(page.getByText("5 adults, 5 children")).toBeVisible();
+  await expect(page.getByText("4 Star Rating")).toBeVisible();
+
+  await expect(
+    page.getByRole("link", { name: "View Details" }).first()
+  ).toBeVisible();
+
+  await expect(page.getByRole("link", { name: "Add Hotel" })).toBeVisible();
+});
+
+test("should allow edit hotels", async ({ page }) => {
+  await page.goto(ui_url + "my-hotels");
+  await page.getByRole("link", { name: "View Details" }).click();
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue("Test Hotel");
+  await page.locator('[name="name"]').fill("Test Hotel Updated");
+  await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.getByText("update successful")).toBeVisible();
+
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue("Test Hotel Updated");
+  await page.locator('[name="name"]').fill("Test Hotel");
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.locator('[name="name"]').fill("Test Hotel Updated");
+  await expect(page.getByText("update successful")).toBeVisible();
 });

@@ -1,3 +1,5 @@
+import { HotelsResponseType } from "./../interfaces/interfaces";
+
 import { TRegisterFormData } from "../interfaces/interfaces";
 const API_BASE_URL = import.meta.env.VITE_DEV_URL || "";
 
@@ -60,7 +62,7 @@ export const logOut = async () => {
 };
 
 export const addMyHotel = async (hotelFormData: FormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels`, {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/my-hotels`, {
     method: "POST",
     credentials: "include",
     body: hotelFormData,
@@ -68,6 +70,44 @@ export const addMyHotel = async (hotelFormData: FormData) => {
   if (!response.ok) {
     throw new Error("Failed to add hotel");
   }
+
+  return await response.json();
+};
+
+export const fetchMyHotels = async (): Promise<{
+  massage: string;
+  data: HotelsResponseType[];
+}> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/my-hotels`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) throw new Error("failed to fetch hotels");
+  return await response.json();
+};
+
+export const fetchSingleHotel = async (
+  id: string
+): Promise<{ message: string; data: HotelsResponseType }> => {
+  const result = await fetch(`${API_BASE_URL}/api/hotels/my-hotels/${id}`, {
+    credentials: "include",
+  });
+
+  if (!result.ok) throw new Error("failed to fetch hotels");
+
+  return await result.json();
+};
+
+export const updateMyHotel = async (payload: FormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/hotels/my-hotels/${payload.get("hotelId")}`,
+    {
+      method: "PUT",
+      body: payload,
+      credentials: "include",
+    }
+  );
+  if (!response.ok) throw new Error("failed to update");
 
   return await response.json();
 };

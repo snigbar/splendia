@@ -18,4 +18,8 @@ const uploadImages = async (imgFiles: Express.Multer.File[]) => {
   return await Promise.all(uploadPromises)
 }
 
+export const deleteImgsFromCloudinary = async (imgId: string[]) => {
+  await cloudinary.api.delete_resources(imgId)
+}
+
 export default uploadImages

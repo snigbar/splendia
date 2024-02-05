@@ -95,3 +95,38 @@ export type HotelsResponseType = {
   bookings: BookingType[];
   createdAt?: string;
 };
+
+export type TSearchParams = {
+  destination: string;
+  checkIn: string;
+  checkOut: string;
+  adultCount: number;
+  childCount: number;
+};
+
+export type TSearchContext = {
+  destination: string;
+  checkIn: Date;
+  checkOut: Date;
+  adultCount: number;
+  childCount: number;
+  hotelId: string;
+  saveSearchValue: (
+    destination: string,
+    checkIn: Date,
+    checkOut: Date,
+    adultCount: number,
+    childCount: number,
+    hotelId?: string
+  ) => void;
+};
+
+export type THotelSearchResponse = {
+  message: string;
+  data: HotelsResponseType[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

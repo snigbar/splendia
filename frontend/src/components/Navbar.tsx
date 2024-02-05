@@ -27,7 +27,7 @@ export default function Navbar() {
     <div className="w-full flex justify-between items-center py-5">
       {/* logo */}
       <Link to="/">
-        <img src="./splendiaLogo.png" className="w-32" />
+        <img src="./splendiaLogo.png" className="w-36" />
       </Link>
       {/* nav links */}
       <ul className="flex items-center gap-5 text-[16px] font-medium">

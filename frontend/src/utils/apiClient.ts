@@ -1,4 +1,8 @@
-import { HotelsResponseType } from "./../interfaces/interfaces";
+import {
+  HotelsResponseType,
+  THotelSearchResponse,
+  TSearchParams,
+} from "./../interfaces/interfaces";
 
 import { TRegisterFormData } from "../interfaces/interfaces";
 const API_BASE_URL = import.meta.env.VITE_DEV_URL || "";
@@ -110,4 +114,26 @@ export const updateMyHotel = async (payload: FormData) => {
   if (!response.ok) throw new Error("failed to update");
 
   return await response.json();
+};
+
+export const searchHotels = async (
+  searchParams: TSearchParams
+): Promise<THotelSearchResponse> => {
+  const queryParams = new URLSearchParams();
+
+  queryParams.append("destination", searchParams.destination);
+  queryParams.append("checkIn", searchParams.checkIn);
+  queryParams.append("checkOut", searchParams.checkOut);
+  queryParams.append("adultCount", searchParams.adultCount.toString());
+  queryParams.append("childCount", searchParams.adultCount.toString());
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/hotels/search?${queryParams}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Error fetching hotels");
+  }
+
+  return response.json();
 };

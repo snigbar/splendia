@@ -36,7 +36,10 @@ export default function GuestsSection() {
           type="Number"
           className="block border border-gray-400 w-full p-3 rounded mt-1"
           placeholder="Number of Adults"
-          {...register("childCount", { required: "This field is required" })}
+          {...register("childCount", {
+            required: "This field is required",
+            min: 0,
+          })}
           autoComplete="true"
         />
         {errors.childCount && (

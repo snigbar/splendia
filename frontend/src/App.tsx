@@ -11,8 +11,11 @@ import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
+import { useAppContext } from "./context/AppContext";
+import Search from "./pages/Search";
 
 function App() {
+  const { isLoggedIn } = useAppContext();
   return (
     <Router>
       <Routes>
@@ -28,7 +31,7 @@ function App() {
           path="/search"
           element={
             <Layout>
-              <div>search</div>
+              <Search></Search>
             </Layout>
           }
         ></Route>
@@ -48,30 +51,35 @@ function App() {
             </Layout>
           }
         ></Route>
-        <Route
-          path="/add-hotel"
-          element={
-            <Layout>
-              <AddHotel></AddHotel>
-            </Layout>
-          }
-        ></Route>
-        <Route
-          path="/my-hotels"
-          element={
-            <Layout>
-              <MyHotels></MyHotels>
-            </Layout>
-          }
-        ></Route>
-        <Route
-          path="/my-hotels/edit-hotel/:hotelId"
-          element={
-            <Layout>
-              <EditHotel></EditHotel>
-            </Layout>
-          }
-        ></Route>
+        {isLoggedIn && (
+          <>
+            {" "}
+            <Route
+              path="/add-hotel"
+              element={
+                <Layout>
+                  <AddHotel></AddHotel>
+                </Layout>
+              }
+            ></Route>
+            <Route
+              path="/my-hotels"
+              element={
+                <Layout>
+                  <MyHotels></MyHotels>
+                </Layout>
+              }
+            ></Route>
+            <Route
+              path="/my-hotels/edit-hotel/:hotelId"
+              element={
+                <Layout>
+                  <EditHotel></EditHotel>
+                </Layout>
+              }
+            ></Route>
+          </>
+        )}
         <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
     </Router>

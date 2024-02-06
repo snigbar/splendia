@@ -102,6 +102,7 @@ export type TSearchParams = {
   checkOut: string;
   adultCount: number;
   childCount: number;
+  page: string;
 };
 
 export type TSearchContext = {

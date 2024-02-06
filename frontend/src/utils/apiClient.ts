@@ -126,6 +126,7 @@ export const searchHotels = async (
   queryParams.append("checkOut", searchParams.checkOut);
   queryParams.append("adultCount", searchParams.adultCount.toString());
   queryParams.append("childCount", searchParams.adultCount.toString());
+  queryParams.append("page", searchParams.page.toString());
 
   const response = await fetch(
     `${API_BASE_URL}/api/hotels/search?${queryParams}`

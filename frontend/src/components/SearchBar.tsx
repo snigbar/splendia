@@ -32,7 +32,6 @@ export default function SearchBar() {
     );
     navigate("/search");
   };
-
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
@@ -109,7 +108,10 @@ export default function SearchBar() {
         <button className=" bg-cyan-600 text-white h-full p-2 font-bold hover:bg-cyan-500 w-full">
           <MdSearch className="inline text-xl"></MdSearch> Search
         </button>
-        <button className="bg-rose-600 text-white h-full p-2 font-bold hover:bg-rose-500 w-full lg:rounded-e-full">
+        <button
+          type="reset"
+          className="bg-rose-600 text-white h-full p-2 font-bold hover:bg-rose-500 w-full lg:rounded-e-full"
+        >
           Clear
         </button>
       </div>

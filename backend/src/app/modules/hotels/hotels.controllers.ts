@@ -4,6 +4,7 @@ import { HotelType } from './hotels.interface'
 import HotelModel from './hotels.model'
 import { findMyhotelsFromDB, findSingleHotel } from './hotels.services'
 import uploadImages, { deleteImgsFromCloudinary } from '../../utils/uploadImges'
+import constructQuery from '../../utils/queryConstructor'
 
 // create hotel
 export const createHotel = handleAsyncRequest(
@@ -101,16 +102,33 @@ export const updateHotel = handleAsyncRequest(
 // queries api
 export const getQueries = handleAsyncRequest(
   async (req: Request, res: Response) => {
+    const query = constructQuery(req.query)
     const pageSize = 5
     const page = parseInt(req.query?.page ? req.query.page.toString() : '1')
     const skip = (page - 1) * pageSize
 
-    const hotels = await HotelModel.find().skip(skip).limit(pageSize)
+    let sortOptions = {}
+    switch (req.query.sortOption) {
+      case 'starRating':
+        sortOptions = { starRating: -1 }
+        break
+      case 'pricePerNightAsc':
+        sortOptions = { pricePerNight: 1 }
+        break
+      case 'pricePerNightDesc':
+        sortOptions = { pricePerNight: -1 }
+        break
+    }
+
+    const hotels = await HotelModel.find(query)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(pageSize)
 
     if (!hotels) {
       throw new Error('no hotel found')
     }
-    const documentCount = await HotelModel.countDocuments()
+    const documentCount = await HotelModel.countDocuments(query)
 
     res.status(201).json({
       message: 'hotel retrived successful',

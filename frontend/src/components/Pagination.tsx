@@ -1,6 +1,7 @@
 export type Props = {
   page: number;
   pages: number;
+
   onPageChange: (number: number) => void;
 };
 

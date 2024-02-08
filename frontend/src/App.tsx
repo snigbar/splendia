@@ -13,6 +13,7 @@ import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
 import { useAppContext } from "./context/AppContext";
 import Search from "./pages/Search";
+import Details from "./pages/Details";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -48,6 +49,14 @@ function App() {
           element={
             <Layout>
               <SignIn></SignIn>
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/detail/:hotelId"
+          element={
+            <Layout>
+              <Details></Details>
             </Layout>
           }
         ></Route>

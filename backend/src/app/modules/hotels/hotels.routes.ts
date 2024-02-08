@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import multer from 'multer'
 import {
   createHotel,
+  getHotelById,
   getHotels,
   getQueries,
   getSingleHotel,
@@ -35,8 +36,10 @@ router.post(
   createHotel,
 )
 
-router.get('/my-hotels', verifyToken, getHotels)
 router.get('/search', getQueries)
+router.get('/hotel/:id', getHotelById)
+// authorized routes
+router.get('/my-hotels', verifyToken, getHotels)
 router.get('/my-hotels/:id', verifyToken, getSingleHotel)
 router.put(
   '/my-hotels/:id',

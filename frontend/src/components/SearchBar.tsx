@@ -71,7 +71,7 @@ export default function SearchBar() {
             min={0}
             max={20}
             value={childCount}
-            onChange={(event) => setChildCount(parseInt(event.target.value))}
+            onChange={(event) => setChildCount(Number(event.target.value))}
           />
         </label>
       </div>
@@ -108,6 +108,7 @@ export default function SearchBar() {
         <button className=" bg-cyan-600 text-white h-full p-2 font-bold hover:bg-cyan-500 w-full">
           <MdSearch className="inline text-xl"></MdSearch> Search
         </button>
+
         <button
           type="reset"
           className="bg-rose-600 text-white h-full p-2 font-bold hover:bg-rose-500 w-full lg:rounded-e-full"

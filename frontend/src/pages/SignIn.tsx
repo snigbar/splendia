@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TRegisterFormData } from "../interfaces/interfaces";
 import * as apiClient from "../utils/apiClient";
 import { useMutation, useQueryClient } from "react-query";
@@ -16,6 +16,7 @@ export default function SignIn() {
 
   const { showToast } = useAppContext();
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
 
   const mutation = useMutation(apiClient.signIn, {
@@ -23,7 +24,7 @@ export default function SignIn() {
       showToast({ message: "login Successful", type: "success" });
       queryClient.invalidateQueries("validateToken");
       reset();
-      navigate("/");
+      navigate(location.state?.from?.pathname || "/");
     },
     onError: (err: Error) =>
       showToast({

@@ -141,3 +141,19 @@ export const getQueries = handleAsyncRequest(
     })
   },
 )
+
+// hotel destials
+export const getHotelById = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    const id = req.params.id.toString()
+    if (!id) throw new Error('hotel id is required')
+
+    const hotel = await HotelModel.findById(id)
+    if (!hotel) throw new Error('no hotel found')
+
+    res.status(201).json({
+      message: 'Hotel data retrived',
+      data: hotel,
+    })
+  },
+)

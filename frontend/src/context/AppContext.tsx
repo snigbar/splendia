@@ -3,6 +3,9 @@ import { TAppContext, TToast } from "../interfaces/interfaces";
 import Toast from "../components/Toast";
 import { useQuery } from "react-query";
 import * as apiclient from "../utils/apiClient";
+import { loadStripe } from "@stripe/stripe-js";
+
+const Stripe_PUB_Key = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 const AppContext = createContext<TAppContext | null>(null);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -11,11 +14,14 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     retry: false,
   });
 
+  const stripePromise = loadStripe(Stripe_PUB_Key);
+
   return (
     <AppContext.Provider
       value={{
         showToast: (toast: TToast) => setToast(toast),
         isLoggedIn: !isError,
+        stripePromise,
       }}
     >
       {toast && (

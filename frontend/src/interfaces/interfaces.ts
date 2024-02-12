@@ -1,3 +1,4 @@
+import { Stripe } from "@stripe/stripe-js";
 import { ReactNode } from "react";
 
 export type THotelType =
@@ -35,6 +36,7 @@ export type TToast = {
 export type TAppContext = {
   showToast: (toast: TToast) => void;
   isLoggedIn: boolean;
+  stripePromise: Promise<Stripe | null>;
 };
 
 export interface TChildren {
@@ -64,7 +66,7 @@ export type HotelFormData = {
   childCount: number;
 };
 
-export type BookingType = {
+export type TBookingType = {
   _id: string;
   userId: string;
   firstName: string;
@@ -75,6 +77,13 @@ export type BookingType = {
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+};
+
+export type TUserResponse = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 };
 
 export type HotelsResponseType = {
@@ -92,7 +101,7 @@ export type HotelsResponseType = {
   starRating: number;
   imageUrls: string[];
   lastUpdated: Date;
-  bookings: BookingType[];
+  bookings: TBookingType[];
   createdAt?: string;
 };
 
@@ -135,4 +144,23 @@ export type THotelSearchResponse = {
     page: number;
     pages: number;
   };
+};
+
+export type TPaymentIntentResponse = {
+  clientSecret: string;
+  paymentId: string;
+  totalCost: number;
+};
+
+export type TBookingFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  adultCount: number;
+  childCount: number;
+  hotelId: string;
+  totalCost: number;
+  paymentIntentId: string;
+  checkIn: string;
+  checkOut: string;
 };

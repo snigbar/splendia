@@ -16,7 +16,7 @@ export default function Pagination({ page, pages, onPageChange }: Props) {
     <div className="flex justify-center">
       <ul className="flex border border-slate-300">
         {pageNumbers.map((number) => (
-          <li>
+          <li key={number}>
             <button
               onClick={() => onPageChange(number)}
               className={`px-3 py-1 ${

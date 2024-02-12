@@ -35,6 +35,8 @@ export default function SearchBar() {
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
+  const minCheckoutDate = new Date();
+  minCheckoutDate.setDate(checkIn.getDate() + 1);
 
   return (
     <form
@@ -75,6 +77,7 @@ export default function SearchBar() {
           />
         </label>
       </div>
+
       <div>
         <DatePicker
           selected={checkIn}
@@ -94,9 +97,9 @@ export default function SearchBar() {
           selected={checkOut}
           onChange={(date) => setCheckOut(date as Date)}
           selectsStart
-          startDate={checkIn}
+          startDate={minCheckoutDate}
           endDate={checkOut}
-          minDate={minDate}
+          minDate={minCheckoutDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
           className="min-w-full bg-white p-2 focus:outline-none border border-slate-300"

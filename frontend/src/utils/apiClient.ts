@@ -1,11 +1,23 @@
 import {
   HotelsResponseType,
+  TBookingFormData,
   THotelSearchResponse,
+  TPaymentIntentResponse,
   TSearchParams,
+  TUserResponse,
 } from "./../interfaces/interfaces";
 
 import { TRegisterFormData } from "../interfaces/interfaces";
 const API_BASE_URL = import.meta.env.VITE_DEV_URL || "";
+
+export const fetchme = async (): Promise<TUserResponse> => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) throw new Error("failed to fetch user");
+  return await response.json();
+};
 
 export const register = async (formData: TRegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -142,20 +154,65 @@ export const searchHotels = async (
     `${API_BASE_URL}/api/hotels/search?${queryParams}`
   );
 
+  const result = await response.json();
   if (!response.ok) {
-    throw new Error("Error fetching hotels");
+    throw new Error(result.message || "Error fetching hotels");
   }
 
-  return await response.json();
+  return result;
 };
 
 export const fetchHotelDetails = async (
   id: string
 ): Promise<{ message: string; data: HotelsResponseType }> => {
   const response = await fetch(`${API_BASE_URL}/api/hotels/hotel/${id}`);
+  const result = await response.json();
   if (!response.ok) {
-    throw new Error("failed to fetch hotel details");
+    throw new Error(result.message || "failed to fetch hotel details");
   }
 
-  return await response.json();
+  return result;
+};
+
+export const createPaymentIntent = async (
+  numberOfNights: number,
+  hotelId: string
+): Promise<TPaymentIntentResponse> => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/hotels/${hotelId}/booking/payment-intent`,
+    {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ numberOfNight: numberOfNights }),
+    }
+  );
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message || "Error fetching payment intent");
+  }
+
+  return result;
+};
+
+export const createBooking = async (data: TBookingFormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/hotels/${data.hotelId}/booking`,
+    {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message || "failed to book");
+  }
 };

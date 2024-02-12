@@ -6,6 +6,8 @@ import {
   getHotels,
   getQueries,
   getSingleHotel,
+  makeBooking,
+  paymentIntent,
   updateHotel,
 } from './hotels.controllers'
 import verifyToken from '../../middlewares/auth'
@@ -39,7 +41,6 @@ router.post(
 router.get('/search', getQueries)
 router.get('/hotel/:id', getHotelById)
 // authorized routes
-router.get('/my-hotels', verifyToken, getHotels)
 router.get('/my-hotels/:id', verifyToken, getSingleHotel)
 router.put(
   '/my-hotels/:id',
@@ -47,5 +48,10 @@ router.put(
   upload.array('imageFiles'),
   updateHotel,
 )
+router.get('/my-hotels', verifyToken, getHotels)
+// payment intent
+router.post('/:hotelId/booking/payment-intent', verifyToken, paymentIntent)
+router.post('/:hotelId/booking', verifyToken, makeBooking)
+
 const hotelRoutes = router
 export default hotelRoutes

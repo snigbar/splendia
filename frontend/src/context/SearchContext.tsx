@@ -4,6 +4,9 @@ import { TChildren, TSearchContext } from "../interfaces/interfaces";
 const searchContext = createContext<TSearchContext | undefined>(undefined);
 
 export default function SearchContext({ children }: TChildren) {
+  const checkOutDate = new Date();
+  checkOutDate.setDate(checkOutDate.getDate() + 1);
+
   const [destination, setDestination] = useState<string>(
     () => sessionStorage.getItem("destination") || ""
   );
@@ -11,7 +14,7 @@ export default function SearchContext({ children }: TChildren) {
     new Date(sessionStorage.getItem("checkIn") || new Date().toISOString())
   );
   const [checkOut, setCheckOut] = useState<Date>(
-    new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
+    new Date(sessionStorage.getItem("checkOut") || checkOutDate.toISOString())
   );
   const [adultCount, setAdultCount] = useState<number>(() =>
     parseInt(sessionStorage.getItem("adultCount") || "1")

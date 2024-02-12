@@ -1,5 +1,6 @@
 import config from '../../config/config'
 import handleAsyncRequest from '../../utils/handleAsyncRequest'
+import UserModel from '../users/users.model'
 import { login } from './auth.services'
 import { Request, Response } from 'express'
 
@@ -32,3 +33,12 @@ export const logout = handleAsyncRequest(
     res.send()
   },
 )
+
+export const getMe = handleAsyncRequest(async (req: Request, res: Response) => {
+  const userId = req.userId
+  const user = await UserModel.findById(userId).select('-password')
+
+  if (!user) throw new Error('no user found')
+
+  res.status(201).json(user)
+})

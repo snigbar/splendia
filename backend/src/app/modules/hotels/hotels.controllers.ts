@@ -239,3 +239,31 @@ export const makeBooking = handleAsyncRequest(
     })
   },
 )
+
+// get my bookings
+
+export const getMyBookings = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    const userId = req.userId
+    const hotel = await HotelModel.aggregate([
+      { $match: { bookings: { $elemMatch: { userId: { $eq: userId } } } } },
+    ])
+
+    if (!hotel) throw new Error('no bookings found')
+
+    const bookingOfUser = hotel.map((hotel) => {
+      const usersBooking = hotel.bookings.filter(
+        (book: BookingType) => book.userId === userId,
+      )
+      return {
+        ...hotel,
+        bookings: usersBooking,
+      }
+    })
+
+    res.status(201).json({
+      message: 'Booking Data Retrived',
+      data: bookingOfUser,
+    })
+  },
+)

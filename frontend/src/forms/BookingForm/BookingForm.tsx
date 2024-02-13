@@ -31,8 +31,11 @@ export default function BookingForm({
     onSuccess: () => {
       showToast({ message: "Booking Completed!", type: "success" });
     },
-    onError: () => {
-      showToast({ message: "Error saving booking", type: "error" });
+    onError: (err: Error) => {
+      showToast({
+        message: err.message || "Error saving booking",
+        type: "error",
+      });
     },
   });
 

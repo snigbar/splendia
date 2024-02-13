@@ -105,7 +105,7 @@ export const fetchMyHotels = async (): Promise<{
 export const fetchSingleHotel = async (
   id: string
 ): Promise<{ message: string; data: HotelsResponseType }> => {
-  const result = await fetch(`${API_BASE_URL}/api/hotels/my-hotels/${id}`, {
+  const result = await fetch(`${API_BASE_URL}/api/hotels/hotel/${id}`, {
     credentials: "include",
   });
 
@@ -164,14 +164,14 @@ export const searchHotels = async (
 
 export const fetchHotelDetails = async (
   id: string
-): Promise<{ message: string; data: HotelsResponseType }> => {
+): Promise<HotelsResponseType> => {
   const response = await fetch(`${API_BASE_URL}/api/hotels/hotel/${id}`);
   const result = await response.json();
   if (!response.ok) {
     throw new Error(result.message || "failed to fetch hotel details");
   }
 
-  return result;
+  return result?.data;
 };
 
 export const createPaymentIntent = async (
@@ -215,4 +215,17 @@ export const createBooking = async (data: TBookingFormData) => {
   if (!response.ok) {
     throw new Error(result.message || "failed to book");
   }
+};
+
+export const fetchMyBookings = async (): Promise<HotelsResponseType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/my-bookings`, {
+    credentials: "include",
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message || "failed to fetch");
+  }
+
+  return result?.data;
 };

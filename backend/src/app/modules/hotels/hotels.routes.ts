@@ -4,6 +4,7 @@ import {
   createHotel,
   getHotelById,
   getHotels,
+  getMyBookings,
   getQueries,
   getSingleHotel,
   makeBooking,
@@ -49,6 +50,7 @@ router.put(
   updateHotel,
 )
 router.get('/my-hotels', verifyToken, getHotels)
+router.get('/my-bookings', verifyToken, getMyBookings)
 // payment intent
 router.post('/:hotelId/booking/payment-intent', verifyToken, paymentIntent)
 router.post('/:hotelId/booking', verifyToken, makeBooking)

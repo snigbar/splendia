@@ -35,29 +35,27 @@ export default function Details() {
       {isLoading ? (
         <Loader></Loader>
       ) : (
-        hotelData?.data && (
+        hotelData && (
           <div className="flex flex-col gap-6 py-12 px-4">
             {/* heading */}
             <div className=" flex items-end justify-between mb-6">
               <div className="sapace-y-2">
                 <h1 className="text-3xl font-bold cursor-pointer">
-                  {hotelData?.data?.name}
+                  {hotelData?.name}
                 </h1>
                 <p className="flex items-center gap-1 font-semibold">
                   <IoLocationSharp className="text-slate-700" />{" "}
-                  {hotelData?.data?.country}, {hotelData?.data?.city}
+                  {hotelData?.country}, {hotelData?.city}
                 </p>
               </div>
               <div className="space-y-2">
                 <span className="flex">
-                  {Array.from({ length: hotelData?.data?.starRating }).map(
-                    () => (
-                      <AiFillStar className="fill-yellow-400" />
-                    )
-                  )}
+                  {Array.from({ length: hotelData?.starRating }).map(() => (
+                    <AiFillStar className="fill-yellow-400" />
+                  ))}
                 </span>
                 <span className="ml-1 font-medium italic">
-                  {hotelData?.data?.type}
+                  {hotelData?.type}
                 </span>
               </div>
             </div>
@@ -72,10 +70,10 @@ export default function Details() {
               modules={[Pagination, Navigation]}
               className="mySwiper h-[250px] lg:h-[400px] w-full lg:w-3/4 mx-auto rounded-xl overflow-hidden"
             >
-              {hotelData.data.imageUrls.map((img) => (
+              {hotelData.imageUrls.map((img) => (
                 <SwiperSlide>
                   <img
-                    alt={hotelData.data.name}
+                    alt={hotelData.name}
                     src={img}
                     className="h-full w-full object-center object-cover"
                   />
@@ -86,7 +84,7 @@ export default function Details() {
             {/* facilities */}
             <div className="flex gap-1 items-center flex-wrap">
               <span className="mr-2 font-medium">Facilities</span>
-              {hotelData.data?.facilities.map((facility) => (
+              {hotelData?.facilities.map((facility) => (
                 <span className="bg-indigo-500 py-2 px-4 rounded-md font-bold text-white text-sm whitespace-nowrap">
                   {facility}
                 </span>
@@ -97,12 +95,14 @@ export default function Details() {
             <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 items-start">
               {/* description */}
               <div className="whitespace-pre-line p-4 text-justify">
-                {hotelData.data.description}
+                {hotelData.description}
               </div>
 
               <GuestInForm
-                hotelId={hotelData.data._id}
-                pricePerNight={hotelData.data.pricePerNight}
+                hotelId={hotelData._id}
+                pricePerNight={hotelData.pricePerNight}
+                childCount={hotelData.childCount}
+                adultCount={hotelData.adultCount}
               ></GuestInForm>
             </div>
           </div>

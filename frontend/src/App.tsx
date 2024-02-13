@@ -15,6 +15,7 @@ import { useAppContext } from "./context/AppContext";
 import Search from "./pages/Search";
 import Details from "./pages/Details";
 import Booking from "./pages/Booking";
+import MyBookings from "./pages/MyBookings";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -93,6 +94,14 @@ function App() {
               element={
                 <Layout>
                   <Booking></Booking>
+                </Layout>
+              }
+            ></Route>
+            <Route
+              path="/my-bookings"
+              element={
+                <Layout>
+                  <MyBookings></MyBookings>
                 </Layout>
               }
             ></Route>

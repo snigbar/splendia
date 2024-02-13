@@ -7,6 +7,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 type Props = {
   hotelId: string;
   pricePerNight: number;
+  adultCount: number;
+  childCount: number;
 };
 
 type GuestInFromData = {
@@ -15,7 +17,12 @@ type GuestInFromData = {
   adultCount: number;
   childCount: number;
 };
-export const GuestInForm = ({ hotelId, pricePerNight }: Props) => {
+export const GuestInForm = ({
+  hotelId,
+  pricePerNight,
+  adultCount,
+  childCount,
+}: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const search = useSearchContext();
@@ -117,6 +124,11 @@ export const GuestInForm = ({ hotelId, pricePerNight }: Props) => {
                   value: 1,
                   message: "There must be at least one adult",
                 },
+                validate: (val: number) => {
+                  if (val > adultCount)
+                    return `maximum adult capacity is ${adultCount}`;
+                  else return true;
+                },
                 valueAsNumber: true,
               })}
             />
@@ -130,15 +142,25 @@ export const GuestInForm = ({ hotelId, pricePerNight }: Props) => {
               max={20}
               {...register("childCount", {
                 valueAsNumber: true,
+                validate: (val: number) => {
+                  if (val > childCount)
+                    return `maximum child capacity is ${childCount}`;
+                  else return true;
+                },
               })}
             />
-            {errors.adultCount && (
-              <span className="text-red-500 font-semibold text-sm">
-                {errors.adultCount.message}
-              </span>
-            )}
           </label>
         </div>
+        {errors.adultCount && (
+          <span className="text-red-500 font-semibold text-sm">
+            {errors.adultCount.message}
+          </span>
+        )}
+        {errors.childCount && (
+          <span className="text-red-500 font-semibold text-sm">
+            {errors.childCount.message}
+          </span>
+        )}
         {isLoggedIn ? (
           <button
             type="submit"

@@ -74,7 +74,7 @@ export const GuestInForm = ({
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 shadow-md bg-white sticky top-5 text-cyan-600">
+    <div className="flex flex-col items-center gap-4 p-4 shadow-md bg-white sticky top-5 text-indigo-600">
       <h1 className="text-lg font-semibold">
         Price Per Night: {pricePerNight}$
       </h1>
@@ -92,7 +92,7 @@ export const GuestInForm = ({
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="w-full bg-white p-2 border border-cyan-600 text-slate-900"
+          className="w-full bg-white p-2 border border-indigo-600 text-slate-900"
           wrapperClassName="w-full"
         />
 
@@ -106,7 +106,7 @@ export const GuestInForm = ({
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="w-full bg-white p-2 border border-cyan-600 text-slate-900"
+          className="w-full bg-white p-2 border border-indigo-600 text-slate-900"
           wrapperClassName="w-full"
         />
 
@@ -164,14 +164,14 @@ export const GuestInForm = ({
         {isLoggedIn ? (
           <button
             type="submit"
-            className="px-6 py-2 bg-cyan-500 text-white rounded-full inset-1 hover:bg-cyan-600"
+            className="px-6 py-2 bg-indigo-500 text-white rounded-full inset-1 hover:bg-indigo-600"
           >
             Book Now
           </button>
         ) : (
           <button
             type="submit"
-            className="px-6 py-2 bg-cyan-500 text-white rounded-full inset-1 hover:bg-cyan-600"
+            className="px-6 py-2 bg-indigo-500 text-white rounded-full inset-1 hover:bg-indigo-600"
           >
             Sign In
           </button>

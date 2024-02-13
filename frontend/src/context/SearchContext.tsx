@@ -49,6 +49,11 @@ export default function SearchContext({ children }: TChildren) {
     sessionStorage.setItem("HotelId", hotelId || "");
   };
 
+  const saveDestination = (destination: string) => {
+    setDestination(destination);
+    sessionStorage.setItem("destination", destination);
+  };
+
   return (
     <searchContext.Provider
       value={{
@@ -59,6 +64,7 @@ export default function SearchContext({ children }: TChildren) {
         childCount,
         hotelId,
         saveSearchValue,
+        saveDestination,
       }}
     >
       {children}

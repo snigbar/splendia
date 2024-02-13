@@ -144,7 +144,7 @@ export default function Register() {
         <button
           type="submit"
           className={cn(
-            "w-full text-center py-3 rounded bg-cyan-500 hover:bg-cyan-600 text-white hover:bg-green-dark focus:outline-none my-1 active:transition active:translate-y-1 duration-200",
+            "w-full text-center py-3 rounded bg-indigo-500 hover:bg-indigo-600 text-white hover:bg-green-dark focus:outline-none my-1 active:transition active:translate-y-1 duration-200",
             { disabled: mutation.isLoading }
           )}
           disabled={mutation.isLoading}
@@ -157,7 +157,10 @@ export default function Register() {
         </div>
         <div className="text-center text-grey-dark mt-2">
           Already have an account?{" "}
-          <Link to="/signin" className="text-cyan-500 font-semibold underline">
+          <Link
+            to="/signin"
+            className="text-indigo-500 font-semibold underline"
+          >
             Log in.
           </Link>
         </div>

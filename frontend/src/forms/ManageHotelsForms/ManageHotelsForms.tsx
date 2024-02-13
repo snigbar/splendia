@@ -70,7 +70,7 @@ function ManageHotelsForms({ isLoading, onSave, hotel }: TProps) {
           <button
             disabled={isLoading}
             type="submit"
-            className="py-3 px-6 bg-cyan-500 text-white inset-1 hover:bg-cyan-600 mt-2 text-lg"
+            className="py-3 px-6 bg-indigo-500 text-white inset-1 hover:bg-indigo-600 mt-2 text-lg"
           >
             {isLoading ? "creating..." : "Save"}
           </button>

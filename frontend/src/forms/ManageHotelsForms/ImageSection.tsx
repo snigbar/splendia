@@ -63,7 +63,7 @@ export default function ImageSection() {
               return true;
             },
           })}
-          className="block border border-gray-400 w-full p-3 rounded mt-1 file:bg-cyan-500 file:border-none file:rounded-lg file:text-white file:px-3 file:py-2 file:font-semibold"
+          className="block border border-gray-400 w-full p-3 rounded mt-1 file:bg-indigo-500 file:border-none file:rounded-lg file:text-white file:px-3 file:py-2 file:font-semibold"
         ></input>
       </label>
       {errors.imageFiles && (

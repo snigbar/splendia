@@ -5,7 +5,7 @@ import { searchHotels } from "../utils/apiClient";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import SearchResultCards from "../components/SearchResultCards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import SelectedStars from "../components/SelectedStars";
 import SelectedHotelTypes from "../components/SelectedHotelTypes";
@@ -47,6 +47,14 @@ function Search() {
     );
     setPage(1);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 350,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   // handle Selected Hotel type
   const handleHotelType = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -30,7 +30,7 @@ export default function MyHotels() {
       <div className="w-full flex justify-between items-center">
         <h1 className="text-3xl font-semibold">My Hotel</h1>
         <Link to="/add-hotel">
-          <button className="px-6 py-2 bg-cyan-600 text-white inset-1 hover:bg-cyan-500 font-medium">
+          <button className="px-6 py-2 bg-indigo-600 text-white inset-1 hover:bg-indigo-500 font-medium">
             Add Hotels
           </button>
         </Link>
@@ -121,7 +121,7 @@ export default function MyHotels() {
               <span className="flex justify-end mt-2">
                 <Link
                   to={`/my-hotels/edit-hotel/${hotel._id}`}
-                  className="flex bg-cyan-600 text-white text-lg font-medium px-4 py-2 hover:bg-cyan-500"
+                  className="flex bg-indigo-600 text-white text-lg font-medium px-4 py-2 hover:bg-indigo-500"
                 >
                   View Details
                 </Link>

@@ -131,7 +131,7 @@ export default function BookingForm({
         <button
           disabled={isLoading}
           type="submit"
-          className="bg-cyan-600 text-white px-4 py-3 font-bold hover:bg-cyan-500 text-md disabled:bg-gray-500"
+          className="bg-indigo-600 text-white px-4 py-3 font-bold hover:bg-indigo-500 text-md disabled:bg-gray-500"
         >
           {isLoading ? "Saving..." : "Confirm Booking"}
         </button>

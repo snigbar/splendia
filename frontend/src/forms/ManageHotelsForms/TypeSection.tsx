@@ -18,8 +18,8 @@ export default function TypeSection() {
         {hotelTypes.map((type) => (
           <label
             className={cn(
-              "cursor-pointer text-center text-xs md:text-sm rounded-full p-1 lg:px-4 lg:py-2 font-semibold bg-gray-100 hover:bg-cyan-500 hover:text-white",
-              { "bg-cyan-600 text-white": typeWatch === type }
+              "cursor-pointer text-center text-xs md:text-sm rounded-full p-1 lg:px-4 lg:py-2 font-semibold bg-gray-100 hover:bg-indigo-500 hover:text-white",
+              { "bg-indigo-600 text-white": typeWatch === type }
             )}
           >
             <input

@@ -134,6 +134,7 @@ export type TSearchContext = {
     childCount: number,
     hotelId?: string
   ) => void;
+  saveDestination: (destination: string) => void;
 };
 
 export type THotelSearchResponse = {

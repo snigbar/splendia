@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useSearchContext } from "../context/SearchContext";
 import { MdTravelExplore, MdSearch } from "react-icons/md";
 import DatePicker from "react-datepicker";
@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 export default function SearchBar() {
   const searchContext = useSearchContext();
   const navigate = useNavigate();
+  const checkOutDate = new Date();
+  const formRef = useRef<HTMLFormElement>(null);
+  checkOutDate.setDate(checkOutDate.getDate() + 1);
 
   const [destination, setDestination] = useState<string>(
     searchContext.destination
@@ -20,6 +23,16 @@ export default function SearchBar() {
   const [childCount, setChildCount] = useState<number>(
     searchContext.childCount
   );
+
+  const handleClear = () => {
+    searchContext.saveSearchValue("", new Date(), checkOutDate, 1, 0);
+    formRef.current?.reset();
+    setDestination("");
+    setCheckIn(new Date());
+    setCheckOut(checkOutDate);
+    setAdultCount(1);
+    setChildCount(0);
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -40,8 +53,9 @@ export default function SearchBar() {
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
-      className="-mt-12 px-4 py-2 rounded-sm lg:rounded-full shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center content-center gap-2 bg-white mx-auto w-11/12"
+      className="-mt-12 px-5 py-3 lg:px-10 xl:px-5 rounded-sm lg:rounded-full shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center content-center gap-2 lg:gap-1 bg-white mx-auto w-11/12"
     >
       <div className="flex flex-row items-center flex-1 bg-white">
         <MdTravelExplore size={25} className="mr-2" />
@@ -108,13 +122,14 @@ export default function SearchBar() {
       </div>
 
       <div className="flex items-center gap-1">
-        <button className=" bg-cyan-600 text-white h-full p-2 font-bold hover:bg-cyan-500 w-full">
+        <button className=" bg-indigo-600 text-white h-full p-2 font-bold hover:bg-indigo-500 w-full">
           <MdSearch className="inline text-xl"></MdSearch> Search
         </button>
 
         <button
           type="reset"
           className="bg-rose-600 text-white h-full p-2 font-bold hover:bg-rose-500 w-full lg:rounded-e-full"
+          onClick={() => handleClear()}
         >
           Clear
         </button>

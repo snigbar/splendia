@@ -21,7 +21,7 @@ const Toast = ({
     <div className="fixed top-5 w-full mx-auto z-50">
       <div
         className={cn(
-          "px-3 py-2 rounded-md bg-cyan-600 text-white max-w-sm mx-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)]",
+          "px-3 py-2 rounded-md bg-indigo-600 text-white max-w-sm mx-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)]",
           {
             "bg-red-500": type === "error",
           }

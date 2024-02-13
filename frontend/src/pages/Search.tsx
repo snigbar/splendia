@@ -14,6 +14,7 @@ import PriceFilter from "../components/PriceFilters";
 
 function Search() {
   const searchContext = useSearchContext();
+  const [toggleFilter, setToggleFilter] = useState(false);
 
   const [page, setPage] = useState<number>(1);
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
@@ -90,8 +91,13 @@ function Search() {
     <div>
       <Header></Header>
       <SearchBar></SearchBar>
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-        <div className="p-5 sticky h-fit rounded-lg border top-10 bg-white shadow-md">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 relative">
+        {/* filter */}
+        <div
+          className={`p-5 absolute top-36 lg:sticky h-fit rounded-lg border lg:top-10 bg-white shadow-md ${
+            toggleFilter ? "" : "hidden"
+          } lg:flex`}
+        >
           <div className="space-y-5">
             <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
               Filter by:
@@ -123,6 +129,8 @@ function Search() {
           </div>
         </div>
 
+        {/* search results */}
+
         <div className="flex flex-col items-center gap-5">
           <span className="text-xl font-bold self-start">
             {hotelData?.pagination.total} Hotels found
@@ -134,24 +142,46 @@ function Search() {
             Showing {hotelData?.data.length} of {hotelData?.pagination.total}
           </p>
           {/* sort option */}
-          <select
-            className="self-end p-2 shadow-md"
-            value={sortOption}
-            onChange={(e) => {
-              setSortOption(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="">SortBy</option>
-            <option value="starRating">Star Rating</option>
-            <option value="pricePerNightAsc">
-              Price Per Night (Low to high)
-            </option>
-            <option value="pricePerNightDesc">
-              Price Per Night (High to low)
-            </option>
-          </select>
-
+          <div className="w-full flex items-center gap-4 justify-between lg:self-end">
+            {/* filter button */}
+            <button
+              className="lg:hidden p-2 bg-white hover:bg-gray-200"
+              onClick={() => setToggleFilter((pre) => !pre)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-8 h-8 inline-block mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                />
+              </svg>
+              Filter{" "}
+            </button>
+            <select
+              className="lg:ml-auto p-2 shadow-md w-28"
+              value={sortOption}
+              onChange={(e) => {
+                setSortOption(e.target.value);
+                setPage(1);
+              }}
+            >
+              <option value="">SortBy</option>
+              <option value="starRating">Star Rating</option>
+              <option value="pricePerNightAsc">
+                Price Per Night (Low to high)
+              </option>
+              <option value="pricePerNightDesc">
+                Price Per Night (High to low)
+              </option>
+            </select>
+          </div>
           {/* search result cards */}
           {hotelData?.data.map((data) => (
             <SearchResultCards hotel={data} key={data._id}></SearchResultCards>

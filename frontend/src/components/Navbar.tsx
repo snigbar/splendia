@@ -61,15 +61,6 @@ export default function Navbar() {
           { "translate-x-0": mobileMenu }
         )}
       >
-        <li>
-          <Link
-            to="/search"
-            className="pb-2 hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600"
-          >
-            Search Hotels
-          </Link>
-        </li>
-
         <button
           className="p-2 hover:bg-gray-200 self-end mr-4"
           onClick={() => setMobileMenu(false)}
@@ -89,6 +80,24 @@ export default function Navbar() {
             />
           </svg>
         </button>
+
+        <li>
+          <Link
+            to="/search"
+            className="pb-2 hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600"
+          >
+            Search Hotels
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            to="/"
+            className="pb-2 hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600"
+          >
+            Home
+          </Link>
+        </li>
         {isLoggedIn ? (
           <>
             {" "}
@@ -137,6 +146,15 @@ export default function Navbar() {
       </ul>
 
       <ul className="md:flex items-center gap-5 text-[16px] font-medium hidden">
+        <li>
+          <Link
+            to="/"
+            className="pb-2 hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600"
+          >
+            Home
+          </Link>
+        </li>
+
         <li>
           <Link
             to="/search"

@@ -43,9 +43,15 @@ export default function Details() {
                 <h1 className="text-3xl font-bold cursor-pointer">
                   {hotelData?.name}
                 </h1>
+
                 <p className="flex items-center gap-1 font-semibold">
                   <IoLocationSharp className="text-slate-700" />{" "}
                   {hotelData?.country}, {hotelData?.city}
+                </p>
+
+                <p className="font-medium text-sm my-1">
+                  Maximum Adult: {hotelData.adultCount}, Maximum Child:{" "}
+                  {hotelData.childCount}
                 </p>
               </div>
               <div className="space-y-2">

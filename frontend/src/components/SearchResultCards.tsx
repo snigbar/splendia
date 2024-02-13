@@ -8,7 +8,7 @@ export default function SearchResultCards({
   hotel: HotelsResponseType;
 }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] bg-white shadow-md rounded-lg p-4  gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] bg-white shadow-md rounded-lg p-4 gap-8">
       {/* image */}
       <div className="w-full h-[300px]">
         <img
@@ -19,9 +19,9 @@ export default function SearchResultCards({
 
       {/* text details */}
 
-      <div className="grid grid-rows-[2fr_3fr_2fr] p-1">
+      <div className="grid grid-rows-[2fr_3fr_2fr] p-1 gap-2">
         {/* heading and start */}
-        <div>
+        <div className="space-y-2">
           <div className="flex items-center justify-end">
             <span className="flex">
               {Array.from({ length: hotel.starRating }).map(() => (
@@ -36,15 +36,21 @@ export default function SearchResultCards({
           >
             {hotel.name}
           </Link>
+
+          <p className="font-medium text-sm my-1 italic">
+            Maximum Adult: {hotel.adultCount}, Maximum Child: {hotel.childCount}
+          </p>
         </div>
 
         {/* hotel descript tion */}
-        <div className="line-clamp-5 text-justify">{hotel.description}</div>
+        <div className="line-clamp-5 text-justify font-sm lg:text-base">
+          {hotel.description}
+        </div>
 
         {/* facilities */}
         <div className="grid grid-cols-2 items-end whitespace-nowrap">
           {/* facilitis */}
-          <div className="flex gap-1 items-center">
+          <div className="flex gap-1 items-center flex-wrap">
             {hotel.facilities.slice(0, 3).map((facility) => (
               <span className="bg-indigo-500 py-1 px-3 rounded-md font-bold text-white text-xs whitespace-nowrap">
                 {facility}

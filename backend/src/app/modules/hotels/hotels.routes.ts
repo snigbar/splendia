@@ -4,6 +4,7 @@ import {
   createHotel,
   getHotelById,
   getHotels,
+  getLatest,
   getMyBookings,
   getQueries,
   getSingleHotel,
@@ -41,6 +42,7 @@ router.post(
 
 router.get('/search', getQueries)
 router.get('/hotel/:id', getHotelById)
+router.get('/latest', getLatest)
 // authorized routes
 router.get('/my-hotels/:id', verifyToken, getSingleHotel)
 router.put(

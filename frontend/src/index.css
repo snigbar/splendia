@@ -32,3 +32,16 @@ html {
   color: white;
   font-weight: bold;
 }
+
+.swiper-pagination-clickable {
+  position: static;
+}
+
+.swiper-pagination-bullet {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(129, 37, 250);
+}

@@ -105,13 +105,22 @@ export const fetchMyHotels = async (): Promise<{
 export const fetchSingleHotel = async (
   id: string
 ): Promise<{ message: string; data: HotelsResponseType }> => {
-  const result = await fetch(`${API_BASE_URL}/api/hotels/hotel/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/hotel/${id}`, {
     credentials: "include",
   });
 
-  if (!result.ok) throw new Error("failed to fetch hotels");
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.message || "failed to fetch hotels");
 
-  return await result.json();
+  return result;
+};
+
+export const fetchLatest = async (): Promise<HotelsResponseType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/latest`);
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.message || "failed to fetch hotels");
+
+  return result.data;
 };
 
 export const updateMyHotel = async (payload: FormData) => {

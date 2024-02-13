@@ -137,7 +137,10 @@ function Search() {
           <select
             className="self-end p-2 shadow-md"
             value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
+            onChange={(e) => {
+              setSortOption(e.target.value);
+              setPage(1);
+            }}
           >
             <option value="">SortBy</option>
             <option value="starRating">Star Rating</option>

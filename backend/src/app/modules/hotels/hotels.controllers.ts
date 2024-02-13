@@ -56,6 +56,17 @@ export const getSingleHotel = handleAsyncRequest(
   },
 )
 
+// get latest hotels
+export const getLatest = handleAsyncRequest(
+  async (req: Request, res: Response) => {
+    const result = await HotelModel.find().sort('-createdAt')
+    if (!result) {
+      throw new Error("didn't find any hotel by use")
+    }
+    res.status(201).json({ message: 'latest hotels retrived', data: result })
+  },
+)
+
 // update hotel
 export const updateHotel = handleAsyncRequest(
   async (req: Request, res: Response) => {

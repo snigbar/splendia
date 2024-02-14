@@ -1,4 +1,8 @@
+
+
 # Splendia Hotel Booking App
+
+### [Live Link](https://splendia.onrender.com/)  - Please wait for a while for the site to load.... (free tier )
 
 This repository contains the source code for the Splendia Hotel Booking App. The project is organized into three main folders: `frontend`, `backend`, and `e2e` (end-to-end tests). Below is an overview of each component along with the technologies used.
 
